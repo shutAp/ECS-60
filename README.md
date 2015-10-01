@@ -1,5 +1,7 @@
 # ECS-60
 ECS 60: Data Structures and Programming
+
+
 1. p1 TimeTest 1
   * Record the times of different structures with different implementations and explain why said data structure works better or worse on different sets of inputs. 
 2. p2 B+ Tree
