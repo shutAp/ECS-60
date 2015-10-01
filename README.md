@@ -13,3 +13,7 @@ ECS 60: Data Structures and Programming
   * Note: I originaly coded Lempel - Ziv - Welch Compression which had a better compression ratio, but took much too long. 
 5. [p5](./p5) Graph Algorithms
   * Our solution for the Graph Power Grid Network problem was to give each node a value (how much energy it needs to give/take). Then, we used Breadth First Search with backflow to minimize transfers. 
+
+![comic][logo]
+
+[logo]: https://github.com/YangVincent/ECS-60/blob/master/img.jpg
