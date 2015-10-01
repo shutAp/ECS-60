@@ -8,7 +8,10 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-  BTree tree(atoi(argv[2]), atoi(argv[3]));
+  cout << "ay" << endl;
+  //BTree tree(3, 3);
+  BTree tree(4, 3);
+  //BTree tree(atoi(argv[2]), atoi(argv[3]));
   int value;
   char s[80];
 
@@ -21,6 +24,15 @@ int main(int argc, char *argv[])
     fgets(s, 80, stdin);
   } // while
 
+  int in = 0;
+  while (in >= 0)
+  {
+    cout << "What do you want to input?" << endl;
+    cin >> in;
+    //cout << "in is " << in << endl;
+    tree.insert(in);
+    tree.print();
+  }
   tree.print();
   return 0;
 }  // main

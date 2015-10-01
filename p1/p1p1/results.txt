@@ -1,0 +1,54 @@
+Scores from p1 for Yang,Vincent Belliss,Davey Jay 
+
+Addresses used: vinyang@ucdavis.edu dybelliss@ucdavis.edu 
+
+timetest.cpp operation testing:
+1: for Test.dat
+1
+0
+OK
+2: for Test.dat
+2
+0
+OK
+3: for File4.dat
+3
+0
+OK
+4: for File4.dat
+4
+0
+OK
+5: for File4.dat
+5
+0
+OK
+6: for File4.dat
+6
+0
+OK
+bags25.dat w/1 bag:
+OK
+bags25.dat w/5 bag:
+OK
+bags37.dat w/7 bag:
+OK
+bags100.dat w/9 bag:
+OK
+bags100.dat w/75 bag:
+OK
+ 
+balance.cpp operation testing:
+balance1.txt: 
+OK
+balance2.txt: 
+OK
+balance3.txt: 
+OK
+balance4.txt: 
+OK
+balance5.txt: 
+OK
+
+timetest.cpp score: 5, bags.cpp score: 10, balance.cpp score: 10
+Total score: 25

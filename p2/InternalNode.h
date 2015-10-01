@@ -11,7 +11,12 @@ class InternalNode:public BTreeNode
 public:
   InternalNode(int ISize, int LSize, InternalNode *p,
     BTreeNode *left, BTreeNode *right);
+  void updateKeys();
+  BTreeNode* pushRight();
+  int getCount()const;
   int getMinimum()const;
+  bool isFull() const;
+  void updateSiblings();
   InternalNode* insert(int value); // returns pointer to new InternalNode
     // if it splits else NULL
   void insert(BTreeNode *oldRoot, BTreeNode *node2); // if root splits use this

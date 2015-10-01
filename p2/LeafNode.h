@@ -9,6 +9,7 @@ class LeafNode:public BTreeNode
 public:
   LeafNode(int LSize, InternalNode *p, BTreeNode *left,
     BTreeNode *right);
+  bool isFull() const;
   int getMinimum() const;
   LeafNode* insert(int value); // returns pointer to new Leaf if splits
   // else NULL

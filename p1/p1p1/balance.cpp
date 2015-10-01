@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "StackLi.h"
 #include <fstream>
+//#include "bags.h"
 
 using namespace std;
 int main(int argc, const char * argv[])
@@ -14,7 +15,10 @@ int main(int argc, const char * argv[])
   bool commented = false;
   int i = 0;
   if (!inf.is_open())
+  {
+    cout << "OK" << endl;
     return 0;
+  }
   while(!inf.eof())
   {
     inf.getline(line, 256);
@@ -25,6 +29,7 @@ int main(int argc, const char * argv[])
       
       if (commented && c != '*')
         continue;
+      //cout << "c is " << c << endl;
       if (c == '/' && line[j+1] == '*')
       {
         stack.push(1);
@@ -68,11 +73,14 @@ int main(int argc, const char * argv[])
         
         stack.pop();
         lineNum.pop();
+        //stack.push(-2);
+        //cout << "It's a )" << endl;
       }
       else if (c == '[') //3
       {
         stack.push(3);
         lineNum.push(i);
+        //cout << "It's a [" << endl;
       }
       else if (c == ']') //-3
       {
@@ -86,7 +94,6 @@ int main(int argc, const char * argv[])
           cout << "Unmatched ] on line #" << lineNum.top() << endl;
           return 0;
         }
-        //cout << "Found close bracket" << endl;
         lineNum.pop();
         stack.pop();
       }
@@ -115,7 +122,6 @@ int main(int argc, const char * argv[])
   }
   if (!stack.isEmpty())
   {
-    //cout << "stack is not empty" << endl;
     if (stack.top() == 1)
     {
       cout << "Unmatched /* on line #" << lineNum.top() << endl;
