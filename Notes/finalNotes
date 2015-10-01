@@ -1,0 +1,74 @@
+Test Breakdown:
+  class Program    20 
+  Hash             25
+  Tree             25
+  Sorting I        25
+  Sorting II       29
+  Graph I          24
+  Graph II         23
+  Graph III        30
+  Graph IV         21
+  ADT/Graph Essay  80
+                  302
+BTree:
+  L = (DiskBlockSize-c)/RecordSize
+  M = (DiskBlockSize-c)/(sizeof(DiskBlockID) + sizeof(key))
+
+
+Double Hashing:
+  (h1(key) + h2(key)*i)/tableSize (i is the number of iterations)
+
+Critical Path:
+  Convert activity node graph to event node graph
+  Set x of (x, y) coordinates 
+
+Sorting Algorithms:
+  QuickSort:
+    Choose pivots at 0, num, and num/2
+    Sort pivots - given a, b, c, 
+      a _ _ _ _ b _ _ _ _ z c (end)
+      a _ _ _ _ z _ _ _ _ b c (end)
+      (previous line has b and z swapped)
+      
+Itr 1:Take left pointer and move when elem > pivot (put over wrong elem)
+      Take right pointer and move when elem < pivot
+      Swap left and right pointer's element. 
+      Stop when left == right
+        Always go left then right
+      Right side always sitting on something greater than or equal to pivot. 
+
+      After this step ends, the middle element is the pivot and it is
+      "golden" - never touched again
+
+Next Itr:
+      Start left on leftMost + 1 element
+
+
+Graph:
+  Directed/Cyclic/Weighted/UnitofWeight?
+    Capacity vs. Distance
+
+Sort:
+  Use Radix sort when range < n
+  List:
+    Insertion
+    She
+    Heap
+    Merge
+    QuickSort
+    Bucket
+    Radix (Bucket is special Radix)
+    
+    Indirect Sorting
+    External
+
+    For test:
+      QuickSort
+      Shell
+      Heap
+      Bucket
+
+Kruskals: E log E
+Prims: 
+  Heap: V^2, E log V, E log E
+

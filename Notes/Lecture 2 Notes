@@ -1,0 +1,59 @@
+Lecture 2 Notes
+list.0 timetest
+File 1 has 1-250,000 Inserts
+File 2 has 1-250,000 Ins, 1-250,000 Del
+File 3 has 1-250,000 Ins, 125,000-1 Del
+File 4 has Random 125,000 Ins Random 125,000 Del
+1) All data structures
+2) delete front to back
+3) delete back to front
+4) random (average case)
+
+Complexity:
+Big O = worst case
+Big Omega = best case
+Big Theta = tight bound; Big O = Big Omega
+Order:
+1 < logn < n < nlogn < n^2 < 2^n < n!
+For log, base is irrelevant. 
+Examples of each below
+
+Don't mention constants isn Big O
+
+Running time caclculations:
+General rules:
+	For Loops: The running time of a for loop as at most the running time of the statements inside the loop * numIterations
+	Nested Loops: Multiply the complexity of each loop
+	Consecutive statements (add)
+	If/Else: The maximum of the two alternatives
+	Analyze from inside out
+	Analyze function calls first. Ignore costs of mechanism of calling functions unless there is a call by value for a data structure with a size dependent on N. (Parameter size affects data structure -> affects Big O)
+
+Interpretation of growth rate functions:
+	O(1) 
+	O(log N): Logarithmic
+	O(N): Linear search
+	O(N log N): Mergesort
+	O(N^2): Two nested loops - Bubble sort and insertion sort)
+	O(N^3): Three nested loops
+	O(2^n): Exponential/Combinatorial; must try every option
+	O(N!): Perspective: 
+		Consider the frequency of the types of operations.
+		Some seldom - used critical operations must be efficient
+		If N is always small, then you can probably ignore the efficiency
+		For smaller N, constants can be important (Mergesort with insersion sort)
+		Weight tradeoffs between algorithm time and memory requirements (Spares matrix vs. full matrix.)
+
+CPU Cache = Subset of RAM on the CPU Chip
+2 MB vs. 4GB RAM
+
+ADTs = a set of objects together with a set of operations on that set
+	Mathematical abstractions, nowhere in their definition there any mention of HOW they are implemented
+	C++ classes permit implementations by using an interface in .h andimplementation in .cpp
+
+	List ADT:
+		Has the form 1, A2, A3... AN
+		Size of list is N with A, called the head and AN called tail
+		Typical operations: Create()/Destroy()/Boolean IsEmpty()
+		Int Length/Insert/Remove?Retrieve(int pos)
+		Axioms:

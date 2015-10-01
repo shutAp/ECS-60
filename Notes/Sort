@@ -1,0 +1,34 @@
+ShellSort - the Diminishing Increment Sort
+1) Give each a marker
+2) Swap if 2nd is bigger than first
+3) Diminish increment for size, insertion sort for each i'th item in 
+  each array
+
+Sedgewick - Cube Sort
+
+QuickSort
+1, 5, 19, 41, 109
+
+4^i - 3*2^i + 1
+
+HeapSort
+  MaxHeap
+
+BucketSort
+N = numItems
+M = range
+
+ExternalSort (Used for Disk Accesses)
+  Sort each tape, then mergesort.
+
+List of Sorts:
+MergeSort
+QuickSort
+HeapSort
+ShellSort
+Indirect Sorting 3/2 N (Sort Pointers w/ other sort, then obj) O(M+N)
+Bucket Sort
+Radix Sort
+External Sort
+Ranged Sort
+

@@ -1,0 +1,86 @@
+Critical Path: Scheduling
+  acyclic directed graph
+  Topological Sort: queue O(V+E)
+Shortest Path: distinguished vertices
+  
+MST - Prim's
+Network Flow Ford-Fulkerson (the one back and forth)
+  O() * maxFlow
+MST - Kruskels find-union
+Articulation Points - Stack
+
+Different representations of graphs:
+Adjacency Matrix
+Adjacency List
+
+
+O(V^2) no data structure
+O(E log E) heap
+O(E log V) heap w/ hash decrease key heap
+
+Discussion:
+1) Topological Sort (event planning)
+2) Djikstra's - Shortest Path - IF YOU HAVE A DISTINGUISHED VERTEX
+  THEN IT IS THIS ONE
+3) Prim's - MST
+4) Net Flow
+5) Kruskals - MST - Hard part is sorting, E log E 
+6) Articulation points
+
+MST - what is the cheapest (lowest weight) set of edges to connect
+  a set of vertices
+Shortest path says given a vertex, what is the shortest path to
+  any other node in the graph.
+
+Adjacency List vs Matrix
+Adjacency Matrix for dense graph
+  Quite literally 
+    A B C D
+  A 1 1 0 1 etc.
+  B
+  C
+  D
+Adjacency List for sparse graph
+
+KRUSKALS WILL BE ON THE TEST, NEEDS DISJOINT SETS
+Kruskals: Unweighted Graph
+  1) Name all edges - AB, BC, BE, etc.
+  2) Union by height
+  3) DISJOINT SETS: Everything starts at -1, union vertices
+  4) Sean's Rule: Alphabetical for tiebreaker
+  5) Accept or reject the edge! 
+  6) Always union roots
+  7) When a union fails, reject the edge. NOT PART OF MST
+  8) Given V vertices, minimum edges needed is V-1
+  9) ONCE V-1 ACCEPTED, DONT PUT ANYTHING IT IS DONE.
+    THIS MEANS THERE ARE V-1 CHECK MARKS
+
+Network Flow:
+  1) Given a directed graph, with two distinguished vertices (s, t) is (start, end)
+  2) It will be weighted
+  3) Greedy Algorithm - Find the most "greedy" path, value is weakest link in it
+  4) NO TABLE NEEDED
+  5) Gf = flow graph = Just the greedy path
+    Gr = Residual graph = StartGraph - FlowGraph
+  6) Draw backwards flow except for source or sink
+  7) Optimal flow is the last flow graph drawn. Each is the sum of prev. flow
+    + new.
+
+Articulation Points:
+  1) Depth First Search
+    Sean's Rule: Alphabetically first one if multiple to consider
+  2) On way through DFS, mark each in order. We're turning graph -> Tree
+  3) Back edges (draw in as dots on tree), are edges not traversed in DFS
+  4) low(v) = min(num(v), lowOfChild, numOfBackedgeVertex).
+  5) Articulation Points: low(child) >= num(self) 
+  6) For root: If it has more than 1 child, it's an art. point.
+
+Breakdown of Test:
+1) Timetest 3 36
+2) Heap       20
+3) Graph I    21
+4) Graph II   30
+5) ADT        43
+             150 total
+
+
