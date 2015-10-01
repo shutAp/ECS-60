@@ -9,80 +9,27 @@
 
 #include "hNode.h"
 
-void hNode::getCode2(hNode* leaves[256], int* binaryChar, int &pos2, short& bits, int& pos, unsigned char* encodedMessage, int size, const unsigned  char *message)
-{
-    hNode* ptr = this;
-    bool leftb[21] = {false};
-    short truth = 0;
-    for (int i = 0; i <= size - 1; i++)
-    {/*
-        if (bits >= 8)
-        {
-        encodedMessage[pos++] = (*binaryChar << 24) >> 24;
-        *binaryChar <<= 8;
-        bits = bits - 8;
-        //    *binaryChar = 0;
-        }*/
-        truth = 0;
-        ptr = leaves[message[i]];
-        
-        while (ptr->parent != NULL)
-        {
-            leftb[truth] = ptr->isLeft;
-            ptr = ptr->parent;
-            truth++;
-            
-            //  ptr = parent;
-        }
-        truth--;
-        
-        while (truth >= 0)
-        {
-            if (leftb[truth])
-            {
-                bits++;
-                
-                if (bits == 8)
-                {
-                    encodedMessage[pos++] = *binaryChar;
-                    bits = 0;
-                    *binaryChar = 0;
-                }
-                
-                *binaryChar <<= 1;
-                
-            }
-            
-            else
-            {
-                bits++;
-                *binaryChar |= 1;
-                
-                if (bits == 8)
-                {
-                    encodedMessage[pos++] = *binaryChar;
-                    *binaryChar = 0;
-                    bits = 0;
-                }
-                *binaryChar <<= 1;
-                
-            }
-            truth--;
-        }
-        
 
-    }
+void hNode::getCode(unsigned  char* binary, int &i)
+{
+    if (parent != NULL)
+        parent->getCode(binary, i);
+    else
+        return;
     
+    if (isLeft)
+        binary[i++] = 0;
+    else
+        binary[i++] = 1;
+
 }// prints original message into binary array to be converted into actual binary in encoded message
 
 
 
-
-
-void hNode::getCode(unsigned  char* binaryChar, int &pos2, short& bits, int& pos, unsigned char* encodedMessage)
+void hNode::getCode2(unsigned  char* binaryChar, int &pos2, short& bits, int& pos, unsigned char* encodedMessage)
 {
     if (parent != NULL)
-        parent->getCode(binaryChar, pos2, bits, pos, encodedMessage);
+        parent->getCode2(binaryChar, pos2, bits, pos, encodedMessage);
     else
         return;
     
@@ -122,11 +69,11 @@ void hNode::getCode(unsigned  char* binaryChar, int &pos2, short& bits, int& pos
     }
     
     
-}
     
+        
 
     
-// prints original message into binary array to be converted into actual binary in encoded message
+}// prints original message into binary array to be converted into actual binary in encoded message
 
 
 
@@ -171,40 +118,33 @@ void hNode::setParentR(hNode *parent)
     
 }
 
-void hNode::treeTraverse(unsigned  char* decodedMessage, unsigned const char* encodedMessage, int &pos, int &decoded, unsigned char* binary, short& bits, int& bytes, int size, short stopper)
+void hNode::treeTraverse(unsigned  char* decodedMessage, unsigned const char* encodedMessage, int &pos, int &decoded, unsigned char* binary, short& bits, int& bytes, int size)
 {
      hNode* ptr = this;
     
-    
-    while(1)
+    while(bytes <  size - 1 )
     {
        
         
-        if (ptr->right) // if not leafNode
-        {
-            if (bits == 8) // used all 8 bits
-            {
-            
-                bits = 0;
-                bytes++;
-                binary[0] = encodedMessage[pos++];
-                if (bytes == size - 1)
-                {
-                    this->treeTraverse3(decodedMessage, decoded, binary, bits, stopper, ptr);
-                    return;
-                }// last set of bits
-                 
-            }// new set of bits
+       
         
-            char x = 128 & binary[0];
-            binary[0] <<= 1;
-            bits++;
+            if (ptr->right) // if not leafNode
+            {
+                if (bits == 8) // used all 8 bits
+                {
             
-            if (x) // go right
-                ptr = ptr->right;
-            
-            else //(encodedMessage[i] == '0')
-                ptr = ptr->left;
+                    bits = 0;
+                    bytes++;
+                    binary[0] = encodedMessage[pos++];
+                }
+        
+                char x = 128 & binary[0];
+                binary[0] <<= 1;
+                 bits++;
+                if (x) // go right
+                    ptr = ptr->right;
+                else //(encodedMessage[i] == '0')
+                    ptr = ptr->left;
                 
             }
     
@@ -218,109 +158,33 @@ void hNode::treeTraverse(unsigned  char* decodedMessage, unsigned const char* en
     
 }//converts binary into chars for decoded message
 
-void hNode::treeTraverse2(unsigned  char* decodedMessage, unsigned const char* encodedMessage, int &pos, int &decoded, unsigned char* binary, short& bits, int& bytes, int size, short stopper)
-{
-    hNode* ptr = this;
-    int test = 0;
-    test = encodedMessage[pos - 1];
-    test <<= 8;
-    test |= encodedMessage[pos++];
-    test <<= 8;
-    test |= encodedMessage[pos++];
-    test <<= 8;
-    test |= encodedMessage[pos++];
 
+
+void hNode::treeTraverse2(unsigned  char* decodedMessage, unsigned const char* encodedMessage, int &pos, int &decoded, unsigned char* binary, short& bits, int& bytes)
+{
     
-    char x;
-    
-    while(1)
+    if (right) // if not leafNode
     {
-        
-        
-        if (ptr->right) // if not leafNode
+        if (bits == 8) // used all 8 bits
         {
-            if (bits == 32) // used all 8 bits
-            {
-                
-                bits = 0;
-                bytes = bytes + 4;
-             //   binary[0] = encodedMessage[pos++];
-                test = encodedMessage[pos++];
-                test <<= 8;
-                test |= encodedMessage[pos++];
-                test <<= 8;
-                test |= encodedMessage[pos++];
-                test <<= 8;
-                test |= encodedMessage[pos++];
-                
-                if (bytes >= size - 1)
-                {
-                    this->treeTraverse3(decodedMessage, decoded, binary, bits, stopper, ptr);
-                    return;
-                }// last set of bits
-                
-            }// new set of bits
-            x = 128 & (test >> 24);
-            test <<=1;
-         //   x = 128 & binary[0];
-          //  binary[0] <<= 1;
-            bits++;
             
-            if (x) // go right
-                ptr = ptr->right;
-            
-            else //(encodedMessage[i] == '0')
-                ptr = ptr->left;
-            
+            bits = 0;
+            bytes++;
+            binary[0] = encodedMessage[pos++];
         }
         
-        else
-        {
-            decodedMessage[decoded++] = (unsigned char)ptr->ASCII;
-            ptr = this;
-            
-        }
-    }
-    
-}//converts binary into chars for decoded message
-
-
-void hNode::treeTraverse3(unsigned  char* decodedMessage, int &decoded, unsigned char* binary, short& bits,  short stopper, hNode* ptr)
-{
-    if (bits == stopper)
+        int x = 128 & binary[0];
+        binary[0] <<= 1;
+        if (x) // go right
+            right->treeTraverse2(decodedMessage, encodedMessage, pos, decoded, binary, ++bits, bytes);
+        else //(encodedMessage[i] == '0')
+            left->treeTraverse2(decodedMessage, encodedMessage, pos, decoded,binary, ++bits, bytes);
         return;
-    
-    while(1 )
-    {
-        
-        if (ptr->right) // if not leafNode
-        {
-
-            
-            char x = 128 & binary[0];
-            *binary <<= 1;
-            bits++;
-            if (x) // go right
-                ptr = ptr->right;
-            else //(encodedMessage[i] == '0')
-                ptr = ptr->left;
-            
-        }
-        
-        else
-        {
-            decodedMessage[decoded++] = (unsigned char)ptr->ASCII;
-            
-            if (bits == stopper) // used all 8 bits
-                return;
-            
-            ptr = this;
-        }
     }
     
+    else
+        decodedMessage[decoded++] = (unsigned char)ASCII;
 }//converts binary into chars for decoded message
-
-
 
 
 

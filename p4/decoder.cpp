@@ -17,10 +17,14 @@ void Decoder::decode(const unsigned  char* encodedMessage, const int encodedSize
                      unsigned  char* decodedMessage, int *decodedSize)
 {
     hNode* root = new hNode();
- 
+    
+    
+//    ofstream of("binary.txt");
+   
     int pointer = 0;
     int *pos = &pointer; // POSITION IN ENCODED ARRAY
-    short extra = encodedMessage[0];
+    int extra = encodedMessage[0];
+
     makeTree(encodedMessage, encodedSize, decodedMessage, decodedSize, root, *pos, false);
     (*pos) = *pos + 5;
     int decode = 0;
@@ -34,9 +38,42 @@ void Decoder::decode(const unsigned  char* encodedMessage, const int encodedSize
     binary[0] = encodedMessage[(*pos)++];
     
     
-    root->treeTraverse(decodedMessage, encodedMessage, *pos, *decoded, binary, *bit, *byte, size, extra);
-     *decodedSize = *decoded;
+//    while(bytes <  size - 2 )
+    root->treeTraverse(decodedMessage, encodedMessage, *pos, *decoded, binary, *bit, *byte, size);
+ 
+     //Reads binary until a known sequence is found -> leafnode is reached
+   
+  //  of << decodedMessage;
+  //  of.close();
     return;
+    root->treeTraverse2(decodedMessage, encodedMessage, *pos, *decoded, binary, *bit, *byte);
+  //  return;
+   // of << decodedMessage;
+  //  of.close();
+   // return;
+    if (*bit == extra || *bit == 8)
+    {
+        *decodedSize = *decoded;
+        return;
+    }//NO Remainder
+    if (bits == 7) // used all 8 bits
+    {
+        
+        bits = 0;
+        bytes++;
+        binary[0] = encodedMessage[(*pos)++];
+    }
+    
+    
+    while ( *bit != extra )// Remainder
+         root->treeTraverse2(decodedMessage, encodedMessage, *pos, *decoded, binary, *bit, *byte);
+    
+    
+    
+    
+   *decodedSize = *decoded;
+    
+
     
 } // decode()
 

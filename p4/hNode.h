@@ -37,12 +37,10 @@ public:
     void setParentL(hNode* parent);
     void setParentR(hNode* parent);
     void setASCII(unsigned char letter);
-        void getCode2(hNode* leaves[256], int* binaryChar, int &pos2, short &bits, int &pos, unsigned char* encodedMessage, int size, const unsigned  char *message);
-    void getCode(unsigned  char* binaryChar, int &pos2, short &bits, int &pos, unsigned char* encodedMessage);
-    void treeTraverse2(unsigned  char* decodedMessage, unsigned const char* encodedMessage, int &pos, int &decoded, unsigned char* binary, short& bits, int& bytes, int size, short stopper);
-    void treeTraverse(unsigned  char* decodedMessage,unsigned const  char* encodedMessage, int &pos, int &decoded, unsigned char* binary, short& bits, int & bytes, int size, short stopper);
-    
-    void treeTraverse3(unsigned  char* decodedMessage, int &decoded, unsigned char* binary, short& bits,  short stopper, hNode* ptr);//final traversal
+    void getCode(unsigned  char* encodedmessage, int &i);
+    void getCode2(unsigned  char* binaryChar, int &pos2, short &bits, int &pos, unsigned char* encodedMessage);
+    void treeTraverse(unsigned  char* decodedMessage,unsigned const  char* encodedMessage, int &pos, int &decoded, unsigned char* binary, short& bits, int & bytes, int size);
+     void treeTraverse2(unsigned  char* decodedMessage,unsigned const  char* encodedMessage, int &pos, int &decoded, unsigned char* binary, short& bits, int & bytes);
     bool isLeafNode();
     
 };

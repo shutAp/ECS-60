@@ -18,7 +18,9 @@ public:
     void encode(const unsigned  char *message, const int size,
                 unsigned  char *encodedMessage, int *encodedSize);
     ~Encoder();
-   
+    
+    unsigned char getBits(short a, short b, short c, short d, short e, short f, short g, short h);
+
 private:
     
 };
