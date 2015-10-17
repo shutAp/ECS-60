@@ -134,7 +134,7 @@ InternalNode* InternalNode::insert(int value) //to be used for normal insertion
         count--;
         insert(temp);
       }
-      cout << "returning new node in internal node insert" << endl;
+      //cout << "returning new node in internal node insert" << endl;
       updateKeys();
       return newNode;
     }
@@ -199,7 +199,7 @@ void InternalNode::insert(BTreeNode *newNode) // from a sibling
 void InternalNode::print(Queue <BTreeNode*> &queue)
 {
   int i;
-  updateKeys();
+ // updateKeys();
   cout << "Internal: ";
   for (i = 0; i < count; i++)
   {

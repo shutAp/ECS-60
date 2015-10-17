@@ -13,11 +13,10 @@ BTree::BTree(int ISize, int LSize):internalSize(ISize), leafSize(LSize)
 
 void BTree::insert(const int value)
 {
-  //cout << "value in BTree:insert is " << value << endl;
   BTreeNode* temp = root->insert(value);
   if (temp != NULL) //if it has to split
   {
-    cout << "splitting root" << endl;
+    //cout << "splitting root" << endl;
     InternalNode* newRoot = new InternalNode(internalSize, leafSize, NULL, NULL, NULL);
     //if (root->getCount() > temp->getCount())
     //{
@@ -27,8 +26,7 @@ void BTree::insert(const int value)
     root -> setParent(newRoot);
     temp -> setParent(newRoot);
     root = newRoot;
-  }
-  //else is null - nothing happens (it worked correctly).
+  }//else is null - nothing happens (it worked correctly).
 } // BTree::insert()
 
 

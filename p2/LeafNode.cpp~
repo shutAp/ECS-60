@@ -25,7 +25,19 @@ int LeafNode::getMinimum()const
     return values[0];
   return 0;
 } // LeafNode::getMinimum()
-
+void LeafNode::toLeft(int value)
+{
+  if (value < values[0]) //if the smallest current value < value
+    leftSibling->insert(value);
+  else
+  {
+    leftSibling->insert(values[0]);
+    for (int i = 0; i < count; i++)//count or count-1?
+      values[i] = values[i+1];
+    count--;
+    insert(value);
+  }
+}
 
 LeafNode* LeafNode::insert(int value)
 {
@@ -33,32 +45,14 @@ LeafNode* LeafNode::insert(int value)
   {
     int i;
     for (i = count; i > 0 && values[i-1] > value; i--)
-    {
       values[i] = values[i-1];
-    }
     values[i] = value;
     count++;
     return NULL;
   }
-  //insert new number to self
-  
   if ((LeafNode*) leftSibling != NULL && !((LeafNode *)leftSibling) -> isFull())
   {
-    //if it gets here, push left.
-    if (value < values[0]) //if the smallest current value < value
-        //then push the smallest value in the array to the left.
-      //else push value over. shift everything accordingly.
-      leftSibling->insert(value);
-    else
-    {
-      leftSibling->insert(values[0]);
-      for (int i = 0; i < count; i++)//count or count-1?
-      {
-        values[i] = values[i+1];
-      }
-      count--;
-      insert(value);
-    }
+    toLeft(value);
     return NULL;
   }
   else if ((LeafNode*) rightSibling != NULL && !((LeafNode *) rightSibling) -> isFull())
@@ -73,28 +67,27 @@ LeafNode* LeafNode::insert(int value)
     }
     return NULL;
   }
+  return newNode(value);
+}  // LeafNode::insert()
+
+LeafNode* LeafNode::newNode(int value)
+{
   LeafNode *newNode = new LeafNode(leafSize, parent, NULL, NULL);
   if (count % 2 == 0)
   {
     for (int i = (count/2); i < count; i++)
-    {
       newNode -> insert(values[i]);
-    }
     count = (count/2);
   }
   else
   {
     for (int i = (count+1)/2; i < count; i++)
-    {
       newNode -> insert(values[i]);
-    }
     count = (count+1)/2;
   }
   //take care of newest
   if (value > values[count-1])
-  {
     newNode -> insert(value);
-  }
   else
   {
     newNode -> insert(values[count-1]);
@@ -102,8 +95,7 @@ LeafNode* LeafNode::insert(int value)
     insert(value);
   }
   return newNode;
-}  // LeafNode::insert()
-
+}
 void LeafNode::print(Queue <BTreeNode*> &queue)
 {
   cout << "Leaf: ";
